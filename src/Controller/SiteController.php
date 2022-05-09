@@ -62,12 +62,13 @@ class SiteController extends AbstractController
     }
 
     /**
-     * @Route("/profil/{id}", name="show_profil")
+     * @Route("/profil", name="show_profil")
      */
-    public function showProfil(User $user)
+    public function showProfil(ProduitRepository $repo)
     {
+        $produits = $repo->findAll();
         return $this->render('site/profil.html.twig',[
-            'user'=> $user,
+            'produits' => $produits,
         ]);
     }
 

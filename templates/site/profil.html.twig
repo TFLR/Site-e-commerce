@@ -4,12 +4,46 @@
 
 	<section class="row article">
 		<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-			<h2>{{ user.username }}
+			<h2>{{ app.user.username }}
 			</h2>
 			<div class="content">
-         {{ user.email|raw }}
-				{{ user.password|raw }}
+			<h2>{{ app.user.email }}
+			</h2>
 			</div>
 		</article>
+		<div>
+		<h1>Produits de {{ app.user.username }} ({{app.user.produits|length}})</h1>
+				{% for produit in app.user.produits %}
+				 						<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+		
+			<h2>{{ produit.nom }}
+			</h2>
+			<div class="metadata">
+			<div class="content">
+				<img src="{{ produit.image }}" alt="Image du produit">
+				{{ produit.description|raw }}
+                <p class="card-text text-end fw-bold">{{ produit.prix }}$</p>
+			</div>
+		</article>
+			{% endfor %}
+				<h1>Commentaires de {{ app.user.username }} ({{app.user.commentaires|length}})</h1>
+					<h2 class="text-center mx-auto m-3">Commentaires</h2>
+	<section id="commentaire" class="col-md-10 mx-auto">
+		{% for commentaire in app.user.commentaires %}
+			<div class="comment">
+				<div class="row">
+					<div class="col-md-3">
+					{{ app.user.username }}
+						(<small>{{ commentaire.createdAt|date('d/m/Y à H:i:s') }}</small>)
+					</div>
+					<div class="col-md-9">
+						{{ commentaire.contenu|raw }}
+					</div>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	</section>
+		</div>
 	</section>
 {% endblock %}

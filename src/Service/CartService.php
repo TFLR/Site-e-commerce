@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Repository\ProductRepository;
+use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
@@ -10,7 +10,7 @@ class CartService
     private $repo;
     private $rs;
 
-    public function __construct(ProductRepository $repo, RequestStack $rs)
+    public function __construct(ProduitRepository $repo, RequestStack $rs)
     {
         $this->repo = $repo;
         $this->rs = $rs;
@@ -75,24 +75,22 @@ class CartService
         $cartWithData = [];
         $qt = 0;
 
-        foreach ($cart as $id =>$quantity) {
+        foreach ($cart as $id =>$quantite) {
             $cartWithData[] = [
-                'product' => $this->repo->find($id), 
-                'quantity' => $quantity
+                'produit' => $this->repo->find($id), 
+                'quantite' => $quantite
             ];
-            $qt += $quantity;
+            $qt += $quantite;
         }
         $session->set('qt', $qt);
         return $cartWithData;
     }
 
-    
-
     public function getTotal()
     {
         $total = 0;
         foreach ($this->getCartWithData() as $item) {
-            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $totalItem = $item['produit']->getPrix() * $item['quantite'];
             $total += $totalItem;
         }
         return $total;

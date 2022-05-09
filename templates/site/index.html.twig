@@ -32,7 +32,7 @@
 					</div>
 					<div class="card-body text-end">
                     <a href="{{ path('show_product', {id: produit.id}) }}" class="card-link btn">voir</a>
-						<a href="" class="card-link btn btn-primary">Ajouter au panier</a>
+					<a href="{{ path('cart_add', {id: produit.id}) }} " class="card-link btn btn-primary">Ajouter au panier</a>
 					</div>
 				</div>
 			</div>

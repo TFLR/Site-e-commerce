@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<h1>
+{% if editMode %}
+    Modification de l'article
+{% else %}
+Création d'un article    
+{% endif %}
+</h1>
+
+
+{{ form_start(formProduit) }}
+{# form_widget() permet de gérer un champ d'un formulaire #}
+{# form_row() permet de gérer un champ d'un formulaire et son label #}
+
+{{ form_row(formProduit.nom, {
+    'label': "Titre", 
+    'attr': {
+        'placeholder': "Titre de l'article"
+    }
+}) }}
+
+{{ form_row(formProduit.description, {
+    'label': "Contenu",
+    'attr': {
+        'placeholder': "Contenu de l'article"
+    }
+}) }}
+
+{{ form_row(formProduit.prix, {
+    'label': "Prix",
+    'attr': {
+        'placeholder': "Prix en euros"
+    }
+}) }}
+
+{{ form_row(formProduit.image,{
+     'label': "Image",
+    'attr': {
+        'placeholder': "lien de l'image"
+    }
+}) }}
+
+{{ form_row(formProduit.categorie_id, {
+    label: "Catégorie"
+}) }}
+
+<button type="submit" class="btn btn-primary">
+{% if editMode %}
+Enregistrer les modifications
+{% else %}
+    Ajouter l'article
+{% endif %}
+</button>
+
+{{ form_end(formProduit) }}
+
+{% endblock %}

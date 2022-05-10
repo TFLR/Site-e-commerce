@@ -30,18 +30,18 @@
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav">
 						<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
-                        						{% if app.user %}
+                        {% if app.user %}
 						<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
+						<a class="nav-link active" href="{{ path('new_product') }}">Nouvel article</a>
+						<a class="nav-link active" href="{{ path('show_profil') }}">Profil</a>
                         {% elseif not app.user %}
 						<a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
 						<a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
                         						{% endif %}
-						<a class="nav-link active" href="{{ path('new_product') }}">Nouvel article</a>
 						<a class="nav-link active" aria-current="page" href="{{ path('app_cart') }}">Panier</a>
-						<a class="nav-link active" href="{{ path('show_profil') }}">Profil</a>
 						{# is_granted() permet de vérifier un rôle de l'utilisateur #}
 						{% if is_granted('ROLE_ADMIN') %}
-							<a href="{{ path('easyadmin') }}" class="nav-link active">BACKOFFICE</a>
+							<a href="" class="nav-link active">admin panel</a>
 						{% endif %}
 					</div>
 				</div>

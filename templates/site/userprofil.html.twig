@@ -4,16 +4,16 @@
 
 	<section class="row article">
 		<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-			<h2>nom d'utilisateur : {{ app.user.username }}
+			<h2>nom d'utilisateur : {{ user.username }}
 			</h2>
 			<div class="content">
-			<h2>email : {{ app.user.email }}
+			<h2>email : {{ user.email }}
 			</h2>
 			</div>
 		</article>
-		<div>
-		<h1 class="text-center mx-auto m-3">Produits de {{ app.user.username }} ({{app.user.produits|length}})</h1>
-				{% for produit in app.user.produits %}
+	<div>
+		<h1 class="text-center mx-auto m-3">Produits de {{ user.username }} ({{user.produits|length}})</h1>
+				{% for produit in user.produits %}
 				 						<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
 		
 			<h2>{{ produit.nom }}
@@ -27,9 +27,9 @@
 			</div>
 		</article>
 			{% endfor %}
-				<h1 class="text-center mx-auto m-3">Commentaires de {{ app.user.username }} ({{app.user.commentaires|length}})</h1>
+				<h1 class="text-center mx-auto m-3">Commentaires de {{ user.username }} ({{user.commentaires|length}})</h1>
 	<section id="commentaire" class="col-md-10 mx-auto">
-		{% for commentaire in app.user.commentaires %}
+		{% for commentaire in user.commentaires %}
 			<div class="comment">
 				<div class="row">
 					<div class="col-md-3">

@@ -6,16 +6,19 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Entity\Contact;
 use App\Entity\Produit;
+use App\Entity\Commentaire;
 use App\Form\ArticleType;
 use App\Form\ContactType;
 use App\Form\ProductType;
 use App\Form\RechercheType;
+use App\Form\CommentaireType;
 use App\Notification\ContactNotification;
 use App\Repository\ArticleRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +43,7 @@ class SiteController extends AbstractController
         }
         else    // pas de recherche : on récupère tous les articles
         {
-            $produits = $repo->findAll();
+            $produits = $repo->findBy([], ["nom" => "ASC"]);
         }
 
         return $this->render('site/index.html.twig',[
@@ -54,12 +57,45 @@ class SiteController extends AbstractController
     /**
      * @Route("/show/{id}", name="show_product")
      */
-    public function show(Produit $produit)
+    public function show(Request $request, EntityManagerInterface $manager,Produit $produit,Commentaire $commentaire=null)
     {
+        $user = $this->getUser();
+        $commentaire = new Commentaire;
+        $commentaire->setUserId($user);
+        $commentaire->setProduitId($produit);
+        $commentaire->setCreatedAt(new \DateTime());
+
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        dump($form);
+
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($commentaire);
+            $manager->flush();
+            return $this->redirectToRoute('show_product',[
+                'id' => $produit->getId()
+            ]
+            );
+        }
+
         return $this->render('site/show.html.twig',[
-            'produit'=> $produit
+            'produit'=> $produit,
+            'formCommentaire' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/profil/{id}", name="user_profil")
+     */
+    public function showUserProfil(User $user)
+    {
+        return $this->render('site/userprofil.html.twig',[
+            'user'=> $user
+        ]);
+    }
+
 
     /**
      * @Route("/profil", name="show_profil")
@@ -83,11 +119,11 @@ class SiteController extends AbstractController
             $produit = new Produit;
             $produit->setUserId($user);
         }
-
+    
         $form = $this->createForm(ProductType::class, $produit);
         $form->handleRequest($request);
         dump($form);
-
+    
         if($form->isSubmitted() && $form->isValid())
         {
             $manager->persist($produit);
@@ -96,10 +132,11 @@ class SiteController extends AbstractController
                 'id' => $produit->getId()
             ]);
         }
-
         return $this->render('site/form.html.twig',[
             'editMode' => $produit->getId() !== null,
             'formProduit' => $form->createView()
         ]);
     }
+
 }
+    

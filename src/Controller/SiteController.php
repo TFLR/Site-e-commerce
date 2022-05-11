@@ -128,6 +128,7 @@ class SiteController extends AbstractController
         {
             $manager->persist($produit);
             $manager->flush();
+            $this->addFlash('success','Le produit a bien été posté');
             return $this->redirectToRoute('show_product',[
                 'id' => $produit->getId()
             ]);
@@ -135,6 +136,34 @@ class SiteController extends AbstractController
         return $this->render('site/form.html.twig',[
             'editMode' => $produit->getId() !== null,
             'formProduit' => $form->createView()
+        ]);
+    }
+
+        /**
+     * @Route("/contact", name="make_contact")
+     */
+    public function contact(Request $request, EntityManagerInterface $manager, ContactNotification $cn)
+    {
+        $contact = new Contact;
+        $contact->setCreatedAt(new \DateTime());
+
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->persist($contact);
+            $manager->flush();
+            $cn->notify($contact);
+            $this->addFlash('success', 'Votre message a bien été envoyé !');
+            // addFlash() permet de créer des msg de notifications
+            // elle prend en param le type et le msg
+            return $this->redirectToRoute('make_contact');
+            // permet de recharger la page et vider les champs du form
+        }
+        return $this->render("site/contact.html.twig", [
+            'formContact' => $form->createView(),
+            'contact' => $contact
         ]);
     }
 

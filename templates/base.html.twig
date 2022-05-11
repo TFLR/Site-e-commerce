@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Site-e-commerce-symfony
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -19,6 +19,11 @@
 		{% endblock %}
 	</head>
 	<body>
+	 {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 		<nav class="navbar navbar-expand-lg navbar">
 			<div class="container-fluid">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +41,10 @@
 						<a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
                         						{% endif %}
 						<a class="nav-link active" aria-current="page" href="{{ path('app_cart') }}">Panier</a>
+						<a class="nav-link active" aria-current="page" href="{{ path('make_contact') }}">Contact</a>
 						{# is_granted() permet de vérifier un rôle de l'utilisateur #}
 						{% if is_granted('ROLE_ADMIN') %}
-							<a href="" class="nav-link active">admin panel</a>
+							<a href="{{ path('easyadmin') }}" class="nav-link active">Admin Panel</a>
 						{% endif %}
 					</div>
 				</div>

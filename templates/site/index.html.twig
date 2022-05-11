@@ -24,11 +24,11 @@
 		{% for produit in produits %}
 
 			<div class="col-md-4">
-				<div class="card mb-4" style="width: 18rem;">
+				<div class="card cardindex mb-4" >
 					<h3 class="card-header">{{ produit.nom }}</h3>
-					<img src="{{ produit.image }}" alt="Image du produit">
-					<p>posté par {{ produit.userId.username }}</p>
-					<p>catégorie : {{ produit.categorieId.titre }}</p>
+					<img src="{{ produit.image }}" class="imageindex" alt="Image du produit">
+					<p>Publié par {{ produit.userId.username }}</p>
+					<p>Catégorie : {{ produit.categorieId.titre }}</p>
 					<div class="card body">
 						<p class="card-text text-end fw-bold">{{ produit.prix }}$</p>
 					</div>

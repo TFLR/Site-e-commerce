@@ -26,7 +26,7 @@
                     <td>{{item.produit.prix}} $ </td>
                     <td>{{item.quantite}} </td>
                     <td>
-                        <a href="{{path('cart_lessAction',{id: item.produit.id}) }}" class="btn-sm btn-success">
+                        <a href="{{path('cart_lessAction',{id: item.produit.id}) }}" class="btn-sm btn-success" style="margin-right: 7px;">
                             <i class="fas fa-minus"></i>
                         </a>               
                         <a href="{{path('cart_add',{id: item.produit.id}) }}" class="btn-sm btn-success">

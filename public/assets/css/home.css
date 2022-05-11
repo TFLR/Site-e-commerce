@@ -40,3 +40,56 @@ img.imageshow{
 a.btn-primary{
     margin-left:500px
 }
+
+a.btn-sm{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+article.card.profilcard{
+    width: 600px;
+    height: 100px;
+}
+
+article.card.produitprofil{
+    width: 800px;
+    height: 540px;
+    margin-bottom: 50px;
+    background-color: #F1EEE9;
+}
+
+img.imageprofil{
+    text-align: center;
+    width: auto;
+    height: 360px;
+}
+
+h2.profilnomproduit{
+    text-align: center;
+    background-color: #EC994B;
+}
+
+p.card-text{
+    text-align:left;
+    margin-left: 10px;
+}
+
+h3.profildescriptionproduit{
+    text-align:left;
+    margin-left: 10px;
+}
+
+div.card.cardindex{
+    width: 18rem;
+    height : 380px;
+    background-color: #F1EEE9;
+}
+
+img.imageindex{
+    width: auto;
+    height: 150px;
+}
+
+h3.card-header{
+    background-color: #EC994B;
+}

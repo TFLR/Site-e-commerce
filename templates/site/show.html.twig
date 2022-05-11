@@ -3,18 +3,17 @@
 {% block body %}
 
 	<section class="row article">
-		<article class="col-md-6 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-		
-			<h2>{{ produit.nom }}
+		<article class="card">
+			<h2 class="nomproduit">{{ produit.nom }}
 			</h2>
 			<div class="metadata">
-				dans la catégorie
+				Catégorie
 				{{ produit.categorieId.titre }}</div>
 			<div class="content">
-				<img src="{{ produit.image }}" alt="Image du produit">
+				<img src="{{ produit.image }}" class="imageshow" alt="Image du produit">
 				<br>
 				{{ produit.description|raw }}
-                <p class="card-text text-end fw-bold">{{ produit.prix }}$</p>
+                <p class="card-text ">Prix: {{ produit.prix }}$</p>
 				<a href="{{ path('cart_add', {id: produit.id}) }} " class="card-link btn btn-primary">Ajouter au panier</a>
 				{% if app.user.id == produit.userId.id or is_granted('ROLE_ADMIN')%}
 				<a href="{{ path('edit_product', {id: produit.id}) }} " class="card-link btn btn-primary">Modifier le produit</a>
@@ -23,7 +22,7 @@
 		</article>
 	</section>
 
-	<h2 class="text-center mx-auto m-3">Commentaires</h2>
+	<h2 class="mx-auto m-3">Commentaires</h2>
 	<section id="commentaire" class="col-md-10 mx-auto">
 		{% for commentaire in produit.commentaires %}
 			<div class="comment">
@@ -48,6 +47,7 @@
     }
 }) }}
 	<button type="submit" class="btn btn-primary" label: "Valider">
+	<i class="fas fa-share"></i>
 	{{ form_end(formCommentaire) }}
 
 {% endblock %}

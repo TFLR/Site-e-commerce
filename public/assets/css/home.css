@@ -1,0 +1,42 @@
+
+nav{
+    background-color: #EC994B;
+    
+}
+
+a.nav-link{
+    color: black;
+}
+
+label.labelpassword{
+    padding-top: 15px;
+}
+
+section.row{
+    margin-left:150px;
+    width: 900px;
+    height: 500px;
+    border-radius: 10px;
+    border-color: black;
+    margin-bottom:100px;
+}
+h2.nomproduit{
+    text-align: center;
+}
+
+div.metadata{
+    text-align: center;
+}
+
+article.card{
+    padding-bottom: 10px;
+}
+img.imageshow{
+    width: auto;
+    height: 400px;
+    margin-left: 35px;
+}
+
+a.btn-primary{
+    margin-left:500px
+}

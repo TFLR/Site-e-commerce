@@ -9,6 +9,7 @@ easy_admin:
           - { entity: "Categorie", icon: "folder-open", label: "Catégories" }
           - { entity: "Produit", icon: "folder-open", label: "Produits" }
           - { entity: "Commentaire", icon: "folder-open", label: "Commentaires" }
+          - { entity: "Contact", icon: "folder-open", label: "Contact" }
 
       - label: "Accès"
         icon: "user"

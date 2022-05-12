@@ -57,7 +57,7 @@ class SiteController extends AbstractController
     /**
      * @Route("/show/{id}", name="show_product")
      */
-    public function show(Request $request, EntityManagerInterface $manager,Produit $produit,Commentaire $commentaire=null)
+    public function show(Request $request, EntityManagerInterface $manager,Produit $produit = null,Commentaire $commentaire=null)
     {
         $user = $this->getUser();
         $commentaire = new Commentaire;
@@ -79,21 +79,31 @@ class SiteController extends AbstractController
             ]
             );
         }
-
+        if(null === $produit) {
+            $this->addFlash("error", "Product Not Found");
+            return $this->redirectToRoute("home");
+        }else{
         return $this->render('site/show.html.twig',[
             'produit'=> $produit,
             'formCommentaire' => $form->createView()
         ]);
     }
+    }
 
     /**
      * @Route("/profil/{id}", name="user_profil")
      */
-    public function showUserProfil(User $user)
+    public function showUserProfil(User $user = null)
     {
-        return $this->render('site/userprofil.html.twig',[
-            'user'=> $user
-        ]);
+
+        if(null === $user) {
+            $this->addFlash("error", "User Not Found");
+            return $this->redirectToRoute("home");
+        }else{
+            return $this->render('site/userprofil.html.twig',[
+                'user'=> $user
+            ]);
+        }
     }
 
 

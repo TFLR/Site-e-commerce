@@ -4,6 +4,10 @@ nav{
     
 }
 
+block.body{
+    background-color: #EC994B;
+}
+
 a.nav-link{
     color: black;
 }
